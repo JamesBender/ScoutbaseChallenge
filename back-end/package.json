@@ -4,7 +4,8 @@
   "description": "Scoutbase Challenge",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "DEBUG=app,app:* nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "express": "^4.17.1",
     "graphql": "^14.4.2",
     "graphql-tools": "^4.0.5",
+    "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {
