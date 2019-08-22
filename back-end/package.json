@@ -45,5 +45,14 @@
       "NODE_ENV": "development",
       "PORT": 8090
     }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "./**/*.{js, jsx, ts, tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/coverage/lcov-report/*",
+      "!./typeDefs.js",
+      "!./app.js"
+    ]
   }
 }
