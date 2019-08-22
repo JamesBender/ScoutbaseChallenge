@@ -33,5 +33,17 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.15.2",
     "jest": "^24.9.0"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules",
+      "./**/*.{spec, test}.js"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 8090
+    }
   }
 }
