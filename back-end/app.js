@@ -14,6 +14,6 @@ app.get('/', (req, res) => {
   res.json({ message: `Hello World! at ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}` });
 });
 
-app.listen(port, () =>
-  debug(`Scoutbase Challnege is ${chalk.greenBright('up')} and listening on port ${chalk.whiteBright(port)}`)
-);
+app.listen(port, () => {
+  debug(`Scoutbase Challenege is ${chalk.greenBright('up')} and listening on port ${chalk.whiteBright(port)}`);
+});

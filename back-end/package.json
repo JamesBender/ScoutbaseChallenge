@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start": "DEBUG=app,app:* nodemon app.js"
+    "start": "DEBUG=app,app:* nodemon app.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
