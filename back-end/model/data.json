@@ -1,0 +1,31 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Avengers: Endgame",
+      "year": "2019",
+      "rating": "10.0",
+      "actors": [
+        { "id": 1, "name": "Chris Hemmsworth", "country": "Austrailia", "birthday": "8/11/1983" },
+        { "id": 2, "name": "Chris Evans", "country": "USA", "birthday": "6/13/1981" },
+        { "id": 3, "name": "Robert Downey Jr.", "country": "USA", "birthday": "4/4/1965" },
+        { "id": 5, "name": "Josh Brolin", "country": "USA", "birthday": "2/12/1968" }
+      ],
+      "directors": [
+        { "id": 1, "name": "Joel Russo", "country": "USA", "birthday": "7/8/1971" },
+        { "id": 1, "name": "Anthony Russo", "country": "USA", "birthday": "2/3/1970" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Deadpool 2",
+      "year": "2018",
+      "rating": "9.9",
+      "actors": [
+        { "id": 4, "name": "Ryan Reylnods", "country": "Canada", "birthday": "10/23/1976" },
+        { "id": 5, "name": "Josh Brolin", "country": "USA", "birthday": "2/12/1968" }
+      ],
+      "directors": [{ "id": 3, "name": "David Leitch", "country": "USA", "birthday": "11/16/1975" }]
+    }
+  ]
+}
