@@ -3,6 +3,17 @@ const typeDefs = `
       movies: [Movie] 
       movie(id: Int): Movie
     }   
+    type Mutation {
+      createUser(username: String, password: String) : CreateUserPayload
+    }
+    type CreateUserPayload {
+      user: User!
+      token: String
+    }
+    type User {
+      id: Int,
+      name: String
+    }
     type Movie {
       id: Int!
       title: String
