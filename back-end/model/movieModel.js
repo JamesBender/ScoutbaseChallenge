@@ -1,9 +1,9 @@
-const movieData = require('./data.json').movies;
-
-module.exports = function(movieData) {
+module.exports = function(movieList) {
   const movieModel = {
-    getMovies: async () => movieData,
-    getMovie: async (id) => movieData.find((movie) => movie.id == id),
+    getMovies: async () => {
+      return movieList;
+    },
+    getMovie: async (id) => movieList.find((movie) => movie.id == id),
   };
 
   return movieModel;

@@ -54,7 +54,7 @@
       "./**/*.{js, jsx, ts, tsx, json}",
       "!<rootDir>/node_modules/",
       "!<rootDir>/coverage/lcov-report/*",
-      "!./typeDefs.js",
+      "!./schema.js",
       "!./app.js"
     ]
   }

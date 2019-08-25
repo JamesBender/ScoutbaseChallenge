@@ -4,7 +4,15 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema');
-const resolvers = require('./resolvers/resolvers');
+
+// Normally, I would inject DB connection information based
+// on configuration/environment. But, this is a sample, so for
+// the sake of simplicity I am using a JSON file, which I'm
+// injecting here instead.
+const movieData = require('./model/data.json').movies;
+const model = require('./model/models')(movieData);
+
+const resolvers = require('./resolvers/resolvers')(model);
 
 const app = express();
 const port = process.env.PORT || 8080;

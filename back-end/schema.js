@@ -1,9 +1,10 @@
 const typeDefs = ` 
     type Query {
       movies: [Movie] 
+      movie(id: Int): Movie
     }   
     type Movie {
-      id: ID!
+      id: Int!
       title: String
       year: String
       rating: String   
