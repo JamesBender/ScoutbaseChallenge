@@ -14,7 +14,7 @@ const movieData = require('./model/data.json').movies;
 const model = require('./model/models')({movieData, userList});
 const authenticationService = require('./auth/authenticationService')(model.userModel);
 
-const resolvers = require('./resolvers/resolvers')({model, authenticationService});
+const resolvers = require('./resolvers/resolvers')({movieModel: model.movieModel, authenticationService});
 
 const app = express();
 const port = process.env.PORT || 8080;
