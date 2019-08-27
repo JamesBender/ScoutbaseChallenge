@@ -1,5 +1,7 @@
-module.exports = (userModel, authenticationService) => {
+module.exports = (authenticationService) => {
   return {
-    createUser: ({ username, password }) => 1,
+    createUser: async ({ username, password }) => {
+      return await authenticationService.createUser({ name: username, password });
+    },
   };
 };

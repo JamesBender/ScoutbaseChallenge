@@ -1,5 +1,4 @@
 const userModelFactory = require('./userModel');
-const chalk = require('chalk');
 
 const userList = [];
 const userModel = userModelFactory(userList);
@@ -9,10 +8,10 @@ describe('when using the user model', () => {
     let result,
       userName = 'test User',
       passwordHash = 'hash';
-    const user = { userName, passwordHash };
+    const user = { name:userName, passwordHash };
 
     beforeAll(async () => {
-      result = await userModel.createUser(user);
+      result = await userModel.createUser(user);      
     });
 
     it('should return a valid user object', () => {
@@ -24,7 +23,7 @@ describe('when using the user model', () => {
     });
 
     it('should return a valid user object with the corrrect user name', () => {
-      expect(result.userName).toBe(userName);
+      expect(result.name).toBe(userName);
     });
 
     it('should return a valid user object with the corrrect password hash', () => {

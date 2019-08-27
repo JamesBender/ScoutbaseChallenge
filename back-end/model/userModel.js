@@ -1,9 +1,9 @@
 module.exports = function(userList) {
   return {
-    createUser: async ({ userName, passwordHash }) => {
+    createUser: async ({ name, passwordHash }) => {
       const user = {
         id: userList.length + 1,
-        userName,
+        name,
         passwordHash,
       };
       userList.push(user);

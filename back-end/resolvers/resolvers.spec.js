@@ -8,11 +8,20 @@ const mockGetMovies = jest.fn(() => [{}, {}, {}]);
 const mockGetMovie = jest.fn((id) => {
   return {};
 });
+const mockCreateUser = jest.fn((args) => {
+  return {};
+});
 
 jest.mock('./movieResolver', () => () => {
   return {
     getMovies: mockGetMovies,
     getMovie: mockGetMovie,
+  };
+});
+
+jest.mock('./userResovler', () => () => {
+  return {
+    createUser: mockCreateUser,
   };
 });
 
@@ -47,7 +56,7 @@ describe('when working with the resolvers', () => {
     let result;
 
     beforeAll(async () => {
-      result = await resolvers.Query.movie(null, {id: 1});
+      result = await resolvers.Query.movie(null, { id: 1 });
     });
 
     it('should bring back a single object', () => {
@@ -56,6 +65,24 @@ describe('when working with the resolvers', () => {
 
     it('should only call the movieResolver once', () => {
       expect(mockGetMovie).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('and creating a new user', () => {
+    let result,
+      username = 'test user',
+      password = '12345';
+
+    beforeAll(async () => {
+      result = await resolvers.Mutation.createUser({ username, password });
+    });
+
+    it('should return an obect', () => {
+      expect(typeof result).toBe('object');
+    });
+
+    it('should only call the user resolver once', () => {
+      expect(mockCreateUser).toHaveBeenCalledTimes(1);
     });
   });
 });

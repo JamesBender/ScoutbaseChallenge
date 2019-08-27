@@ -1,34 +1,44 @@
 const userResolverFactory = require('./userResovler');
 
-const mockCreateUser = jest.fn(({ userName, passwordHash }) => {
-  id: 1, userName, passwordHash;
-});
+const mockId = 99;
+const mockToken = "I'm a token!";
 
-const userModel = {
-  createUser: mockCreateUser,
-};
 const authenticationService = {
-
-}
+  createUser: jest.fn(({ name, password }) => {
+    return { user: { id: mockId, name }, token: mockToken };
+  }),
+};
 
 describe('when working with the user resolver', () => {
-  const userResolver = userResolverFactory(userModel, authenticationService);
+  const userResolver = userResolverFactory(authenticationService);
 
   describe('and creating a user', () => {
     let result;
-    const userName = 'userName',
+    const username = 'user Name',
       password = '12345';
 
     beforeAll(async () => {
-      result = userResolver.createUser({ userName, password });
+      result = await userResolver.createUser({ username, password });
     });
 
-    it('should get back a user id', () => {
-      expect(result).toBe(1);
+    it('should get back a user object', () => {
+      expect(result.user).toBeTruthy();
     });
 
-    // it('should call the user model once', () => {
-    //   expect(mockCreateUser).toHaveBeenCalledTimes(1);
-    // });
+    it('the user object should have the correct id', () => {
+      expect(result.user.id).toBe(mockId);
+    });
+
+    it('the user object should have the correct name', () => {
+      expect(result.user.name).toBe(username);
+    });
+
+    it('the result object should have a token', () => {
+      expect(result.token).toEqual(mockToken);
+    });
+
+    it('should call the user model once', () => {
+      expect(authenticationService.createUser).toHaveBeenCalledTimes(1);
+    });
   });
 });

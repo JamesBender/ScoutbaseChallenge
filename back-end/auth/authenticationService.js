@@ -9,7 +9,6 @@
 // not inject certain things to make the package more
 // portable and easier to use.
 const jwt = require('jwt-simple');
-const chalk = require('chalk');
 const crypto = require('crypto');
 
 module.exports = (userModel) => {
@@ -34,16 +33,17 @@ module.exports = (userModel) => {
     return { salt, passwordHash };
   };
 
-  const setupUser = async (userName, password) => {
+  const setupUser = async (name, password) => {
     const passwordHash = hashPassword(password, generateSalt(16));
-    const user = Object.assign({}, await userModel.createUser({ userName, passwordHash }));
+    const modelUser = await userModel.createUser({ name, passwordHash });
+    const user = Object.assign({}, modelUser);
     delete user.passwordHash;
     return user;
   };
 
   return {
-    createUser: async ({ userName, password }) => {
-      const user = await setupUser(userName, password);
+    createUser: async ({ name, password }) => {
+      const user = await setupUser(name, password);
       const token = jwt.encode(user, secret);
       return { user, token };
     },

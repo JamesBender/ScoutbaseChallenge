@@ -6,9 +6,11 @@
 // to a place that makes more sense.
 
 const movieResolverFactory = require('./movieResolver');
+const userResolverFactory = require('./userResovler');
 
-module.exports = function({ movieModel }) {
+module.exports = function({ movieModel, authenticationService }) {
   const movieResolver = movieResolverFactory(movieModel);
+  const userResolver = userResolverFactory(authenticationService);
 
   const resolvers = {
     Query: {
@@ -16,12 +18,7 @@ module.exports = function({ movieModel }) {
       movie: async (_parent, args) => await movieResolver.getMovie(args.id),
     },
     Mutation: {
-      createUser: (_parent, {username, password}) => {
-        return {
-          token: `userId is ${username} and password is ${password}`,
-          user: { id: 1, name: 'Test User' },
-        };
-      },
+      createUser: (_parent, args) => userResolver.createUser(args),
     },
   };
 

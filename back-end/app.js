@@ -7,12 +7,14 @@ const typeDefs = require('./schema');
 
 // Normally, I would inject DB connection information based
 // on configuration/environment. But, this is a sample, so for
-// the sake of simplicity I am using a JSON file, which I'm
+// the sake of simplicity I am using a JSON file/empty array, which I'm
 // injecting here instead.
+const userList= [];
 const movieData = require('./model/data.json').movies;
-const model = require('./model/models')(movieData);
+const model = require('./model/models')({movieData, userList});
+const authenticationService = require('./auth/authenticationService')(model.userModel);
 
-const resolvers = require('./resolvers/resolvers')(model);
+const resolvers = require('./resolvers/resolvers')({model, authenticationService});
 
 const app = express();
 const port = process.env.PORT || 8080;
