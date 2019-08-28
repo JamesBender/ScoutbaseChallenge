@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
@@ -17,6 +18,7 @@ const authenticationService = require('./auth/authenticationService')(model.user
 const resolvers = require('./resolvers/resolvers')({ movieModel: model.movieModel, authenticationService });
 
 const app = express();
+// app.use(cors);
 const port = process.env.PORT || 8080;
 
 app.use(morgan('combined'));
@@ -28,6 +30,9 @@ app.get('/', (req, res) => {
 });
 
 const server = new ApolloServer({
+  cors: {
+    origin: '*',
+  },
   typeDefs,
   resolvers,
   context: ({ req }) => ({
