@@ -30,7 +30,7 @@ jest.mock('./userResovler', () => () => {
 });
 
 const resolvers = resolversFactory(mockModel);
-
+const goodToken = 'Good Token';
 describe('when working with the resolvers', () => {
   it('should have a valid resolver object', () => {
     expect(typeof resolvers).toBe('object');
@@ -60,7 +60,7 @@ describe('when working with the resolvers', () => {
     let result;
 
     beforeAll(async () => {
-      result = await resolvers.Query.movie(null, { id: 1 });
+      result = await resolvers.Query.movie(null, { id: 1 }, { authScope: goodToken });
     });
 
     it('should bring back a single object', () => {

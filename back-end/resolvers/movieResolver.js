@@ -5,8 +5,11 @@ module.exports = function(movieModel, authenticationService) {
     getMovies: async ({ token }) => {
       const authenticatedUser = await authenticationService.authenticateUser(token);
       console.log(chalk.cyanBright(`User authentication: ${authenticatedUser}`));
-      return await movieModel.getMovies();
+      return await movieModel.getMovies({ authenticatedUser });
     },
-    getMovie: async (id) => await movieModel.getMovie(id),
+    getMovie: async ({id, token}) => {
+      const authenticatedUser = await authenticationService.authenticateUser(token);
+      return await movieModel.getMovie({ id, authenticatedUser });
+    },
   };
 };

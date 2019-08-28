@@ -10,33 +10,41 @@ describe('when working wih the movieModel', () => {
   describe('and getting a list of movies', () => {
     let result;
 
-    beforeAll(async () => {
-      result = await movieModel.getMovies();
-    });
+    describe('and the user is authenticated', () => {
+      beforeAll(async () => {
+        result = await movieModel.getMovies({ authenticatedUser: true });
+      });
 
-    it('should get a complete list of movies', () => {
-      expect(result.length).toBe(mockMovieData.length);
-    });
+      it('should get a complete list of movies', () => {
+        expect(result.length).toBe(mockMovieData.length);
+      });
 
-    it('should be the same list of movies', () => {
-      expect(result).toEqual(mockMovieData);
-    });
+      it('each movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
+        result.forEach((movie) => {
+          expect(movie.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
+        });
+      });
 
-    it('each movie should have a randome scoutbase rating higher than 5.0', () => {
-      result.forEach((movie) => {
-        expect(movie.scoutbase_rating).toBeGreaterThan(scoutbaseRatingFloor);
+      it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
+        result.forEach((movie) => {
+          expect(movie.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+        });
       });
     });
 
-    it('each movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
-      result.forEach((movie) => {
-        expect(movie.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
+    describe('and the user is not authenticated', () => {
+      beforeAll(async () => {
+        result = await movieModel.getMovies({ authenticatedUser: false });
       });
-    });
 
-    it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
-      result.forEach((movie) => {
-        expect(movie.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+      it('should get a complete list of movies', () => {
+        expect(result.length).toBe(mockMovieData.length);
+      });
+
+      it('each movie should not have a random scoutbase ', () => {
+        result.forEach((movie) => {
+          expect(movie.scoutbase_rating).toBeUndefined();
+        });
       });
     });
   });
@@ -45,39 +53,71 @@ describe('when working wih the movieModel', () => {
     let result;
     const expected = mockMovieData[0];
 
-    describe('and the id number is a number', () => {
-      beforeAll(async () => {
-        result = await movieModel.getMovie(1);
+    describe('and the user is authenticated', () => {
+      describe('and the id number is a number', () => {
+        beforeAll(async () => {
+          result = await movieModel.getMovie({ id: 1, authenticatedUser: true });
+        });
+
+        it('should get the expected movie', () => {
+          expect(result.id).toEqual(expected.id);
+        });
+
+        it('movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
+          expect(result.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
+        });
+
+        it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
+          expect(result.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+        });
       });
 
-      it('should get the expected movie', () => {
-        expect(result).toEqual(expected);
-      });
+      describe('and the id number is a string', () => {
+        beforeAll(async () => {
+          result = await movieModel.getMovie({ id: '1', authenticatedUser: true });
+        });
 
-      it('movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
-        expect(result.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
-      });
+        it('should get the expected movie', () => {
+          expect(result.id).toEqual(expected.id);
+        });
 
-      it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
-        expect(result.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+        it('movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
+          expect(result.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
+        });
+
+        it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
+          expect(result.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+        });
       });
     });
 
-    describe('and the id number is a string', () => {
-      beforeAll(async () => {
-        result = await movieModel.getMovie('1');
+    describe('and the user is not authenticated', () => {
+      describe('and the id number is a number', () => {
+        beforeAll(async () => {
+          result = await movieModel.getMovie({ id: 1, authenticatedUser: false });
+        });
+
+        it('should get the expected movie', () => {
+          expect(result.id).toEqual(expected.id);
+        });
+
+        it('movie should not have a randome scoutbase rating ', () => {
+          expect(result.scoutbase_rating).toBeUndefined();
+        });
       });
 
-      it('should get the expected movie', () => {
-        expect(result).toEqual(expected);
-      });
+      describe('and the id number is a string', () => {
+        beforeAll(async () => {
+          result = await movieModel.getMovie({ id: '1', authenticatedUser: false });
+        });
 
-      it('movie should have a randome scoutbase rating greater than or equal to 5.0', () => {
-        expect(result.scoutbase_rating).toBeGreaterThanOrEqual(scoutbaseRatingFloor);
-      });
+        it('should get the expected movie', () => {
+          expect(result.id).toEqual(expected.id);
+        });
 
-      it('each movie should have a randome scoutbase rating less than or equal to 9.0', () => {
-        expect(result.scoutbase_rating).toBeLessThanOrEqual(scoutbaseRatingCieling);
+        it('movie should not have a random scoutbase rating', () => {
+          expect(result.scoutbase_rating).toBeUndefined();
+        });
       });
     });
   });

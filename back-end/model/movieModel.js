@@ -4,18 +4,19 @@ module.exports = function(movieList) {
       max = 9;
     let rating = Math.random() * (+max - +min) + +min;
     rating = Math.round(rating * 100) / 100;
-    movie.scoutbase_rating = rating;
-    return movie;
+    return Object.assign({ scoutbase_rating: rating }, movie);
   };
 
   const movieModel = {
-    getMovies: async () => {
-      return movieList.map((movie) => getRandomRating(movie));
+    getMovies: async ({ authenticatedUser }) => {
+      if (authenticatedUser) {
+        return movieList.map((movie) => getRandomRating(movie));
+      }
+      return movieList;
     },
-    getMovie: async (id) => {
+    getMovie: async ({ id, authenticatedUser }) => {
       let movie = movieList.find((movie) => movie.id == id);
-      movie = getRandomRating(movie);
-      return movie;
+      return authenticatedUser ? getRandomRating(movie) : movie;
     },
   };
 

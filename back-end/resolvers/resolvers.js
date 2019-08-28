@@ -15,9 +15,9 @@ module.exports = function({ movieModel, authenticationService }) {
   const resolvers = {
     Query: {
       movies: async (_parent, _args, context) => {
-        return await movieResolver.getMovies({token: context.authScope});
+        return await movieResolver.getMovies({ token: context.authScope });
       },
-      movie: async (_parent, args) => await movieResolver.getMovie(args.id),
+      movie: async (_parent, args, context) => await movieResolver.getMovie({ id: args.id, token: context.authScope }),
     },
     Mutation: {
       createUser: (_parent, args) => userResolver.createUser(args),
