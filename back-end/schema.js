@@ -20,6 +20,7 @@ const typeDefs = `
       title: String
       year: String
       rating: String   
+      scoutbase_rating: String
       actors: [Actor]
       directors: [Director]   
     }    
