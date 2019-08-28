@@ -1,51 +1,54 @@
-// I usually use a service like Auth0 or Okta or use
-// Passport js for authentication. But, to keep this sample
-// simple, assuming the right credentials are passed, I'm
-// just creating a JWT here and returning it.
-// I'm also not injecting my JWT provider from auth.js.
-// In most clients I've worked for, we wanted the
-// authentication/authorization library to be reusable
-// across several apps, and we found it was easier to
-// not inject certain things to make the package more
-// portable and easier to use.
 const jwt = require('jwt-simple');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 module.exports = (userModel) => {
-  // Normally I would user a service like Auth0 to
-  // handle creating my JWT tokens, but to keep this
-  // demo simple, I'm just using a string and keeping
-  // it here.
   const secret = 'ScoutbaseSample';
+  const loginErrorMessage = 'Invlaid username/password combination.';
 
-  const generateSalt = (length) => {
-    return crypto
-      .randomBytes(Math.ceil(length / 2))
-      .toString('hex')
-      .slice(0, length);
-  };
-
-  const hashPassword = (password, salt) => {
-    const hash = crypto.createHmac('sha512', salt);
-    hash.update(password);
-    const passwordHash = hash.digest('hex');
-
-    return { salt, passwordHash };
-  };
-
-  const setupUser = async (name, password) => {
-    const passwordHash = hashPassword(password, generateSalt(16));
-    const modelUser = await userModel.createUser({ name, passwordHash });
+  const createUserForRespone = (modelUser) => {
     const user = Object.assign({}, modelUser);
     delete user.passwordHash;
     return user;
   };
+  const getExistingUser = async (name) => {
+    const modelUser = await userModel.getUser(name);
+    if (!modelUser) {
+      throw new Error(loginErrorMessage);
+    }
+    return modelUser;
+  };
+
+  const validatePassword = async (password, passwordHash) => {
+    const valid = await bcrypt.compare(password, passwordHash);
+    if (!valid) {
+      throw new Error(loginErrorMessage);
+    }
+    return valid;
+  };
 
   return {
     createUser: async ({ name, password }) => {
-      const user = await setupUser(name, password);
-      const token = jwt.encode(user, secret);
+      const passwordHash = await bcrypt.hash(password, 10);
+      const modelUser = await userModel.createUser({ name, passwordHash });
+      const user = createUserForRespone(modelUser);
+      const token = jwt.encode({ userId: user.id }, secret);
       return { user, token };
+    },
+    login: async ({ name, password }) => {
+      const modelUser = await getExistingUser(name);
+      await validatePassword(password, modelUser.passwordHash);
+      const user = createUserForRespone(modelUser);
+      const token = jwt.encode({ userId: user.id }, secret);
+      return { user, token };
+    },
+    authenticateUser: async (token) => {
+      if (token) {
+        token = token.replace('Bearer', '');
+        token = token.replace(' ', '');
+        const { userId } = await jwt.decode(token, secret);
+        return userId ? true : false;
+      }
+      return false;
     },
   };
 };

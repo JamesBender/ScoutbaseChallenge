@@ -2,12 +2,17 @@ const movieResolverFactory = require('./movieResolver');
 
 const mockMovieModel = {
   getMovies: jest.fn(async () => [{}, {}, {}]),
-  getMovie: jest.fn(async (id) => {
+  getMovie: jest.fn(async (_id) => {
     return {};
   }),
 };
 
-const movieResolver = movieResolverFactory(mockMovieModel);
+const mockAuthService = {
+  authenticateUser: jest.fn(async (token) => true),
+};
+
+const movieResolver = movieResolverFactory(mockMovieModel, mockAuthService);
+const token = 'This is a token';
 
 describe('when working with the movie resolver', () => {
   it('you should have a valid object', () => {
@@ -18,7 +23,7 @@ describe('when working with the movie resolver', () => {
     let result;
 
     beforeAll(async () => {
-      result = await movieResolver.getMovies();
+      result = await movieResolver.getMovies({ token });
     });
 
     it('should get a list of movies', () => {

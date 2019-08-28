@@ -4,11 +4,14 @@ const mockModel = {
   movieModel: {},
 };
 
-const mockGetMovies = jest.fn(() => [{}, {}, {}]);
-const mockGetMovie = jest.fn((id) => {
+const mockGetMovies = jest.fn(({}) => [{}, {}, {}]);
+const mockGetMovie = jest.fn((_id) => {
   return {};
 });
-const mockCreateUser = jest.fn((args) => {
+const mockCreateUser = jest.fn((_args) => {
+  return {};
+});
+const mockLogin = jest.fn((_args) => {
   return {};
 });
 
@@ -22,6 +25,7 @@ jest.mock('./movieResolver', () => () => {
 jest.mock('./userResovler', () => () => {
   return {
     createUser: mockCreateUser,
+    login: mockLogin,
   };
 });
 
@@ -36,7 +40,7 @@ describe('when working with the resolvers', () => {
     let result;
 
     beforeAll(async () => {
-      result = await resolvers.Query.movies();
+      result = await resolvers.Query.movies(null, null, { authScope: 'test' });
     });
 
     it('should get back an array of movies', () => {
@@ -83,6 +87,24 @@ describe('when working with the resolvers', () => {
 
     it('should only call the user resolver once', () => {
       expect(mockCreateUser).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('and logging a user in', () => {
+    let result,
+      username = 'test user',
+      password = '12345';
+
+    beforeAll(async () => {
+      result = resolvers.Mutation.login(username, password);
+    });
+
+    it('should return an object', () => {
+      expect(typeof result).toBe('object');
+    });
+
+    it('should call the user resolver once', () => {
+      expect(mockLogin).toHaveBeenCalledTimes(1);
     });
   });
 });

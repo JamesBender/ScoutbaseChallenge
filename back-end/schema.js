@@ -4,9 +4,10 @@ const typeDefs = `
       movie(id: Int): Movie
     }   
     type Mutation {
-      createUser(username: String, password: String) : CreateUserPayload
+      createUser(username: String, password: String): UserAuthPayload
+      login(username: String, password: String): UserAuthPayload
     }
-    type CreateUserPayload {
+    type UserAuthPayload {
       user: User!
       token: String
     }

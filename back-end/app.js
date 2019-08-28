@@ -9,12 +9,12 @@ const typeDefs = require('./schema');
 // on configuration/environment. But, this is a sample, so for
 // the sake of simplicity I am using a JSON file/empty array, which I'm
 // injecting here instead.
-const userList= [];
+const userList = [];
 const movieData = require('./model/data.json').movies;
-const model = require('./model/models')({movieData, userList});
+const model = require('./model/models')({ movieData, userList });
 const authenticationService = require('./auth/authenticationService')(model.userModel);
 
-const resolvers = require('./resolvers/resolvers')({movieModel: model.movieModel, authenticationService});
+const resolvers = require('./resolvers/resolvers')({ movieModel: model.movieModel, authenticationService });
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -30,6 +30,9 @@ app.get('/', (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({
+    authScope: req.headers.authorization,
+  }),
 });
 
 server.applyMiddleware({ app });
