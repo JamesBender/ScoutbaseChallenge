@@ -43,7 +43,7 @@ module.exports = (userModel) => {
     },
     authenticateUser: async (token) => {
       if (token) {
-        token = token.replace('Bearer', '');
+        token = token.replace('Bearer', '').replace('bearer', '');
         token = token.replace(' ', '');
         const { userId } = await jwt.decode(token, secret);
         return userId ? true : false;
