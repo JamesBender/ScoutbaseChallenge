@@ -8,9 +8,6 @@ const Home = (props) => {
       <p>
         Welcome to the Scoutbase Front-end Challenge!
       </p>
-      {/* <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-        Learn React
-      </a> */}
     </header>
   );
 };
