@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Countries from './components/Countries';
+import Home from './components/Home';
 
 const Routes = (props) => {
   return (
@@ -9,11 +10,14 @@ const Routes = (props) => {
         <nav>
           <ul>
             <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
               <Link to="/countries">Counties</Link>
             </li>
           </ul>
         </nav>
-        <Route path="/" exact component={Countries} />
+        <Route path="/" exact component={Home} />
         <Route path="/countries" component={Countries} />
       </div>
     </Router>
