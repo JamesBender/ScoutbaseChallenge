@@ -13,6 +13,7 @@ const Routes = (props) => {
             </li>
           </ul>
         </nav>
+        <Route path="/" exact component={Countries} />
         <Route path="/countries" component={Countries} />
       </div>
     </Router>
