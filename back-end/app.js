@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
@@ -18,15 +17,13 @@ const authenticationService = require('./auth/authenticationService')(model.user
 const resolvers = require('./resolvers/resolvers')({ movieModel: model.movieModel, authenticationService });
 
 const app = express();
-// app.use(cors);
 const port = process.env.PORT || 8080;
 
 app.use(morgan('combined'));
 
-app.get('/', (req, res) => {
-  // this is just to test connectivity until I get GraphQL stood up, then it goes away...
-  const now = new Date();
-  res.json({ message: `Hello World! at ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}` });
+app.get('/', (_req, res) => {
+  // redirects someone who goes to the main address to the GraphQL endpoint.
+  res.redirect('/graphql');
 });
 
 const server = new ApolloServer({
