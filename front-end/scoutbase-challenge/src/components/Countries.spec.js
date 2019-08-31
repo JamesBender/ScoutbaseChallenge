@@ -2,25 +2,11 @@ import React from 'react';
 import { MockedProvider } from '@apollo/react-testing';
 import { render, act } from '@testing-library/react';
 import wait from 'waait';
-import Countries, { countryQuery } from './Countries';
+import { mockCountryName, countryListMockQuery } from '../../mocks/Countries.mocks';
+import Countries from './Countries';
 
-const mockCountryName = 'sample country',
-  mockPageTitle = 'Countries Component',
+const mockPageTitle = 'Countries Component',
   mockLoadingMessage = 'Loading...';
-
-const apolloMocks = [
-  {
-    request: {
-      query: countryQuery,
-      vairables: {},
-    },
-    result: {
-      data: {
-        countries: [{ name: mockCountryName }],
-      },
-    },
-  },
-];
 
 describe('when working with the countries component', () => {
   describe('and the component is loading', () => {
@@ -54,7 +40,7 @@ describe('when working with the countries component', () => {
     beforeAll(async (done) => {
       await act(async () => {
         component = render(
-          <MockedProvider mocks={apolloMocks} addTypename={false}>
+          <MockedProvider mocks={countryListMockQuery} addTypename={false}>
             <Countries />
           </MockedProvider>
         );
