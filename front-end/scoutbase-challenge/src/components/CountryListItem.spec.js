@@ -11,20 +11,19 @@ const mockCoutry = {
 
 describe('when working with country list time', () => {
   describe('and the component has a country', () => {
-    let component;
+    let component, countryName, countryPhone;
     beforeAll(() => {
       component = render(<CountryListItem key={mockCoutry.name} country={mockCoutry} />);
+      countryName = component.getByText(mockCountryName);
+      countryPhone = component.getByText(mockCountryPhone);
     });
 
     it('should display the name of the country', () => {
-      // Please see Countries.spec.js for an explanation as to why there are
-      // two expects in this test (for now)
-      expect(component.getByText(mockCountryName)).not.toBeUndefined();
-      expect(component.getByText(mockCountryPhone)).not.toBeUndefined();
+      expect(countryName).not.toBeUndefined();
     });
 
-    xit('should display the phone of the country', () => {
-      expect(component.getByText(mockCountryPhone)).not.toBeUndefined();
+    it('should display the phone of the country', () => {
+      expect(countryPhone).not.toBeUndefined();
     });
   });
 });

@@ -13,7 +13,7 @@ const Routes = (props) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/countries">Counties</Link>
+              <Link to="/countries">Countries</Link>
             </li>
           </ul>
         </nav>

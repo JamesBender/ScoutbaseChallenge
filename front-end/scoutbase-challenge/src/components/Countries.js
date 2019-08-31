@@ -3,6 +3,9 @@ import CountryListItem from './CountryListItem';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
+// ToDo: Scaled the query down for unit testing initial component. This
+// will be repalced with the full query once I figure out how I want to
+// style everything and build it up.
 export const countryQuery = gql`
   {
     countries {
