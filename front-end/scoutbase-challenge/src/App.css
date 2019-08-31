@@ -54,3 +54,7 @@
 .seperate {
   clear: both;
 }
+
+.cardContainer {
+  margin: 0 20px;
+}

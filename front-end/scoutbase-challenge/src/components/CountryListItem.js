@@ -1,10 +1,22 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 import { H2, H4, Label } from './common/StyledComponents';
 
 const CountryListItem = ({ country }) => {
   return (
-    <div>
-      <div className="workingDiv">
+    // <div>
+      <Card>
+        <Card.Header>
+          <H2>{country.name}</H2>{country.emoji}
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+          <Label>Native Spelling:</Label>
+          <span>{country.native}</span>
+          </Card.Text>
+        </Card.Body>
+      
+      {/* <div className="workingDiv">
         <div className="countryName">
           <H2>
             <span>{country.name}</span> - {country.emoji}
@@ -21,8 +33,9 @@ const CountryListItem = ({ country }) => {
         </div>
       </div>
       <div className="seperate"></div>
-      <br />
-    </div>
+      <br /> */}
+      </Card>
+    // </div>
   );
 };
 

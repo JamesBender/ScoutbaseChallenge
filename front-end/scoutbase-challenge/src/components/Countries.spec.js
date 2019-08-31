@@ -5,7 +5,7 @@ import wait from 'waait';
 import { mockCountryName, countryListMockQuery } from '../../mocks/Countries.mocks';
 import Countries from './Countries';
 
-const mockPageTitle = 'Countries Component',
+const mockPageTitle = 'Countries',
   mockLoadingMessage = 'Loading...';
 
 describe('when working with the countries component', () => {

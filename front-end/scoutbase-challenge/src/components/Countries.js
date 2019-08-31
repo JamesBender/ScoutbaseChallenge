@@ -2,7 +2,7 @@ import React from 'react';
 import CountryListItem from './CountryListItem';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-
+import CardColumns from 'react-bootstrap/CardColumns';
 
 export const countryQuery = gql`
   {
@@ -29,9 +29,9 @@ const Countries = (props) => {
   return (
     <>
       <div>
-        <h1>Countries Component</h1>
+        <h1>Countries</h1>
       </div>
-      <div>
+      <div className="cardContainer">
         <Query query={countryQuery}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading...</div>;
@@ -39,11 +39,11 @@ const Countries = (props) => {
 
             const countriesToRender = data.countries;
             return (
-              <div>
+              <CardColumns>
                 {countriesToRender.map((country) => (
                   <CountryListItem key={country.name} country={country} />
                 ))}
-              </div>
+              </CardColumns>
             );
           }}
         </Query>
