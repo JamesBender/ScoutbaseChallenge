@@ -31,3 +31,26 @@
     transform: rotate(360deg);
   }
 }
+
+.workingDiv {
+  border: 1px black solid;
+  padding: 0 200px;
+  margin-left: 200px;
+  margin-right: 200px;
+  overflow: hidden;
+}
+
+.countryName {
+  /* background: pink; */
+  width: 350px;
+  float: left;
+}
+
+.countryDetails {
+  /* background: grey; */
+  text-align: left;
+}
+
+.seperate {
+  clear: both;
+}
