@@ -1,45 +1,34 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import { Route } from 'react-router-dom';
 import { H2, CountryNative, Label } from './common/StyledComponents';
 
 const CountryListItem = ({ country }) => {
   const code = country.code;
-  return (
-    // <div>
-    <Card>
-      <Card.Header>
-        <H2>{country.name}</H2>
-        <span>{country.emoji}</span>
-      </Card.Header>
-      <Card.Body>
-        <Card.Text>
-          <Label>Native Spelling:</Label>
-          <CountryNative>
-            <span>{country.native}</span>
-          </CountryNative>
-        </Card.Text>
-      </Card.Body>
 
-      {/* <div className="workingDiv">
-        <div className="countryName">
-          <H2>
-            <span>{country.name}</span> - {country.emoji}
-          </H2>
-          <H4>({country.code})</H4>
-        </div>
-        <div className="countryDetails">
-          <Label>Phone:</Label>
-          <span>{country.phone}</span>
-          <br />
-          <Label>Native Spelling:</Label>
-          <span>{country.native}</span>
-          <br />
-        </div>
-      </div>
-      <div className="seperate"></div>
-      <br /> */}
-    </Card>
-    // </div>
+  return (
+    <Route
+      render={({ history }) => (
+        <Card
+          onClick={() => {
+            history.push(`/country/${code}`);
+          }}
+        >
+          <Card.Header>
+            <H2>{country.name}</H2>
+            <span>{country.emoji}</span>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text>
+              <Label>Native Spelling:</Label>
+              <CountryNative>
+                <span>{country.native}</span>
+              </CountryNative>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      )}
+    />
   );
 };
 
