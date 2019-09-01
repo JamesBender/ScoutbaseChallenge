@@ -1,21 +1,53 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import wait from 'waait';
+import { MockedProvider } from '@apollo/react-testing';
+import { render, act } from '@testing-library/react';
+import { countryMockQuery, mockCountryName, mockCountryCode } from '../../mocks/Country.mocks';
 import Country from './Country';
 
-describe('when working with the Country component', () => {
-  let mainDiv;
+const mockLoadingMessage = 'Loading...';
 
-  const match = {
-    params: {
-      id: 1,
-    },
-  };
-  beforeAll(() => {
-    const { getByText } = render(<Country match={match} />);
-    mainDiv = getByText('In a Big Country....');
+describe('when working with the Country component', () => {
+  describe('and the component has data', () => {
+    let component, countryName;
+
+    beforeAll(async (done) => {
+      await act(async () => {
+        component = render(
+          <MockedProvider mocks={countryMockQuery} addTypename={false}>
+            <Country match={{ params: { id: mockCountryCode } }} />
+          </MockedProvider>
+        );
+        await wait(0);
+      });
+
+      countryName = component.getByText(mockCountryName);
+      done();
+    });
+
+    it('should display the country name', () => {
+      expect(countryName).not.toBeUndefined();
+    });
   });
 
-  it('should render', () => {
-    expect(mainDiv).not.toBeUndefined();
+  describe('and the component is loading', () => {
+    let component, pageTitle, loadingMessage;
+
+    beforeAll(async (done) => {
+      await act(async () => {
+        component = render(
+          <MockedProvider mocks={[]}>
+            <Country />
+          </MockedProvider>
+        );
+
+        loadingMessage = component.getByText(mockLoadingMessage);
+      });
+      done();
+    });
+
+    it('should have a loading status', () => {
+      expect(loadingMessage).not.toBeUndefined();
+    });
   });
 });

@@ -62,7 +62,7 @@ describe('when working with the routes component', () => {
     expect(component.getByText(mockHomeComponentMessage)).not.toBeUndefined();
   });
 
-  it('should be able to navigate to the Country component', () => {
+  xit('should be able to navigate to the Country component', () => {
     fireEvent.click(countryLink);
     expect(component.getByText(mockCountryCode)).not.toBeUndefined();
   });
