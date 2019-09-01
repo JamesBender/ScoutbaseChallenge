@@ -24,7 +24,7 @@ export const countryQuery = gql`
 `;
 
 const Country = ({ match }) => {
-  const code = match ? match.params.id || '' : '';
+  const code = (match ? match.params.id || '' : '').toUpperCase();
 
   return (
     <Query query={countryQuery} variables={{ code }}>

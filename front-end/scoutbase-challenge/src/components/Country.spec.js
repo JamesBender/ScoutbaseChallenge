@@ -30,6 +30,30 @@ describe('when working with the Country component', () => {
     });
   });
 
+  describe('and the country code was passed as lower case', () => {
+    let component,
+      countryName,
+      lowerCaseCountryCode = mockCountryCode.toLowerCase();
+
+    beforeAll(async (done) => {
+      await act(async () => {
+        component = render(
+          <MockedProvider mocks={countryMockQuery} addTypename={false}>
+            <Country match={{ params: { id: lowerCaseCountryCode } }} />
+          </MockedProvider>
+        );
+        await wait(0);
+      });
+
+      countryName = component.getByText(mockCountryName);
+      done();
+    });
+
+    it('should display the country name', () => {
+      expect(countryName).not.toBeUndefined();
+    });
+  });
+
   describe('and the component is loading', () => {
     let component, pageTitle, loadingMessage;
 
