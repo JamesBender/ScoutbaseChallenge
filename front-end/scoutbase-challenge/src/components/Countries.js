@@ -10,17 +10,7 @@ export const countryQuery = gql`
       code
       name
       native
-      phone
-      continent {
-        code
-        name
-      }
-      currency
-      languages {
-        name
-      }
       emoji
-      emojiU
     }
   }
 `;

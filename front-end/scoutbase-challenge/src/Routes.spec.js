@@ -18,7 +18,7 @@ const RouteTestComponent = (props) => {
   return (
     <MemoryRouter initialEntries={['/']} initialIndex={0}>
       <div>
-        <Routes props={props} />
+        <Routes props={props} />        
       </div>
     </MemoryRouter>
   );
@@ -28,12 +28,13 @@ const countryLinkLabel = 'Countries',
   homeLinkLabel = 'Home';
 
 describe('when working with the routes component', () => {
-  let component, countriesLink, homeLink;
+  let component, countriesLink, homeLink, countryLink;
 
   beforeEach(() => {
     component = render(<RouteTestComponent />);
     countriesLink = component.getByText(countryLinkLabel);
     homeLink = component.getByText(homeLinkLabel);
+    countryLink = component.getByText('Country Test');
   });
 
   it('should have a route for Countries', () => {
@@ -44,6 +45,10 @@ describe('when working with the routes component', () => {
     expect(homeLink).not.toBeUndefined();
   });
 
+  it('should render (for test) with a link to test Country route (if this fails, its probably a problem with the test setup', () => {
+    expect(countryLink).not.toBeUndefined();
+  });
+
   it('clicking the Countries link should route to the Countries component', () => {
     fireEvent.click(countriesLink);
     expect(component.getByText(mockCountriesComponentMessage)).not.toBeUndefined();
@@ -52,5 +57,12 @@ describe('when working with the routes component', () => {
   it('clicking the Home Link should route to the Home component', () => {
     fireEvent.click(homeLink);
     expect(component.getByText(mockHomeComponentMessage)).not.toBeUndefined();
+  });
+
+  it('should be able to navigate to the Country component', () => {
+    // This needs to be tweaked when I figure out what's going on 
+    // with the memory router.
+    fireEvent.click(countryLink);    
+    expect(component.getByText('us')).not.toBeUndefined();
   });
 });

@@ -1,7 +1,32 @@
 import React from 'react';
 
-const Country = (props) => {
-  return <div>In a Big Country....</div>;
+// export const countryQuery = gql`
+//   {
+//     countries {
+//       code
+//       name
+//       native
+//       phone
+//       continent {
+//         code
+//         name
+//       }
+//       currency
+//       languages {
+//         name
+//       }
+//       emoji
+//       emojiU
+//     }
+//   }
+// `;
+
+const Country = ({ match }) => {
+  return (
+    <div>
+      <span>In a Big Country....</span> <span>{match.params.id}</span>
+    </div>
+  );
 };
 
 export default Country;
