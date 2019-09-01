@@ -2,50 +2,75 @@ import React from 'react';
 import wait from 'waait';
 import { MockedProvider } from '@apollo/react-testing';
 import { render, act } from '@testing-library/react';
-import { countryMockQuery, mockCountryName, mockCountryCode } from '../../mocks/Country.mocks';
+import * as Mock from '../../mocks/Country.mocks';
 import Country from './Country';
 
 const mockLoadingMessage = 'Loading...';
 
 describe('when working with the Country component', () => {
   describe('and the component has data', () => {
-    let component, countryName;
+    let component, countryName, countryNative, countryPhone, countryContinent, countryCurrency, countryEmoji;
 
     beforeAll(async (done) => {
       await act(async () => {
         component = render(
-          <MockedProvider mocks={countryMockQuery} addTypename={false}>
-            <Country match={{ params: { id: mockCountryCode } }} />
+          <MockedProvider mocks={Mock.countryMockQuery} addTypename={false}>
+            <Country match={{ params: { id: Mock.mockCountryCode } }} />
           </MockedProvider>
         );
         await wait(0);
       });
 
-      countryName = component.getByText(mockCountryName);
+      countryName = component.getByText(Mock.mockCountryName);
+      countryNative = component.getByText(Mock.mockCountryNative);
+      countryPhone = component.getByText(Mock.mockCountryPhone);
+      countryContinent = component.getByText(Mock.mockCountryContinent.name);
+      countryCurrency = component.getByText(Mock.mockCountryCurrency);
+      countryEmoji = component.getByText(Mock.mockCountryEmoji);
       done();
     });
 
     it('should display the country name', () => {
       expect(countryName).not.toBeUndefined();
     });
+
+    it('should display the native name', () => {
+      expect(countryNative).not.toBeUndefined();
+    });
+
+    it('should display the phone', () => {
+      expect(countryPhone).not.toBeUndefined();
+    });
+
+    it('should display the continent name', () => {
+      expect(countryContinent).not.toBeUndefined();
+    });
+
+    it('should display the currency', () => {
+      expect(countryCurrency).not.toBeUndefined();
+    });
+
+    it('should display the emoji', () => {
+      expect(countryEmoji).not.toBeUndefined();
+    });
   });
 
   describe('and the country code was passed as lower case', () => {
     let component,
       countryName,
-      lowerCaseCountryCode = mockCountryCode.toLowerCase();
+      lowerCaseCountryCode = Mock.mockCountryCode.toLowerCase();
 
     beforeAll(async (done) => {
       await act(async () => {
         component = render(
-          <MockedProvider mocks={countryMockQuery} addTypename={false}>
+          <MockedProvider mocks={Mock.countryMockQuery} addTypename={false}>
             <Country match={{ params: { id: lowerCaseCountryCode } }} />
           </MockedProvider>
         );
         await wait(0);
       });
 
-      countryName = component.getByText(mockCountryName);
+      countryName = component.getByText(Mock.mockCountryName);
       done();
     });
 

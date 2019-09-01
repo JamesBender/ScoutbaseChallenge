@@ -31,7 +31,7 @@ const Countries = (props) => {
             return (
               <CardColumns>
                 {countriesToRender.map((country) => (
-                  <CountryListItem key={country.name} country={country} />
+                  <CountryListItem key={country.name} {...props} country={country} />
                 ))}
               </CardColumns>
             );
