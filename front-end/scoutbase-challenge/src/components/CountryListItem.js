@@ -11,7 +11,7 @@ const CountryListItem = ({ country, history }) => {
 
   return (
     <Card>
-      <Card.Header onClick={goToCountry}>
+      <Card.Header data-testid="countryCard" onClick={goToCountry}>
         <H2>{country.name}</H2>
         <span>{country.emoji}</span>
       </Card.Header>
