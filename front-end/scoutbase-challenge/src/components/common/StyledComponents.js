@@ -5,8 +5,9 @@ export const H2 = styled.h2`
   margin-bottom: 10px;
 `;
 
-export const H4 = styled.h4`
+export const CountryNative = styled.span`
   margin: 5px;
+  font-weight: bold;
 `;
 
 export const Label = styled.label`

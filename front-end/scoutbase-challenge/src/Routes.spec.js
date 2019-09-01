@@ -5,6 +5,8 @@ import Routes from './Routes';
 
 const mockCountriesComponentMessage = 'Mock Countries Component';
 const mockHomeComponentMessage = 'Mock Home Component';
+const mockCountryCode = 'us';
+const mockCountryList = `/country/${mockCountryCode}`;
 
 jest.mock('./components/Countries', () => () => {
   return <div>{mockCountriesComponentMessage}</div>;
@@ -18,7 +20,8 @@ const RouteTestComponent = (props) => {
   return (
     <MemoryRouter initialEntries={['/']} initialIndex={0}>
       <div>
-        <Routes props={props} />        
+        <Routes props={props} />
+        <Link to={mockCountryList}>Country Test</Link>
       </div>
     </MemoryRouter>
   );
@@ -60,9 +63,7 @@ describe('when working with the routes component', () => {
   });
 
   it('should be able to navigate to the Country component', () => {
-    // This needs to be tweaked when I figure out what's going on 
-    // with the memory router.
-    fireEvent.click(countryLink);    
-    expect(component.getByText('us')).not.toBeUndefined();
+    fireEvent.click(countryLink);
+    expect(component.getByText(mockCountryCode)).not.toBeUndefined();
   });
 });

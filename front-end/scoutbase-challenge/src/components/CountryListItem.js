@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { H2, H4, Label } from './common/StyledComponents';
+import { H2, CountryNative, Label } from './common/StyledComponents';
 
 const CountryListItem = ({ country }) => {
   const code = country.code;
@@ -9,12 +9,14 @@ const CountryListItem = ({ country }) => {
     <Card>
       <Card.Header>
         <H2>{country.name}</H2>
-        {country.emoji}
+        <span>{country.emoji}</span>
       </Card.Header>
       <Card.Body>
         <Card.Text>
           <Label>Native Spelling:</Label>
-          <span>{country.native}</span>
+          <CountryNative>
+            <span>{country.native}</span>
+          </CountryNative>
         </Card.Text>
       </Card.Body>
 
