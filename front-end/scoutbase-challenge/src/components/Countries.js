@@ -49,4 +49,5 @@ Countries.propTypes = {
     languages: PropTypes.arrayOf(PropTypes.string),
   }),
 };
+
 export default Countries;

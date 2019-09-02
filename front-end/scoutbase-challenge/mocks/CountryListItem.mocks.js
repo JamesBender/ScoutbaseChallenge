@@ -1,5 +1,3 @@
-import { countryQuery } from '../src/components/Countries';
-
 export const mockCountryName = 'sample country',
   mockCountryCode = 'SC',
   mockCountryNative = 'sample native',
