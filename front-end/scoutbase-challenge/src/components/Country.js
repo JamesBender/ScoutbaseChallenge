@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { H1, CountryNative, LeftDetail, Label, SectionHeading, CountryContianer } from './common/StyledComponents';
+import  Languages  from './Languages';
 
 export const countryQuery = gql`
   query getCountry($code: String) {
@@ -57,6 +58,7 @@ const Country = ({ match }) => {
                 </span>
               </div>
               <SectionHeading>Languages:</SectionHeading>
+              <Languages></Languages>
             </CountryContianer>
           </>
         );

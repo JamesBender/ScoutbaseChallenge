@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import { H2, CountryNative, Label } from './common/StyledComponents';
 
@@ -25,6 +26,12 @@ const CountryListItem = ({ country, history }) => {
       </Card.Body>
     </Card>
   );
+};
+
+CountryListItem.propTypes = {
+  country: PropTypes.shape({
+    code: PropTypes.string,
+  }),
 };
 
 export default CountryListItem;
