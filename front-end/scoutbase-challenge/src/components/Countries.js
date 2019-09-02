@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CountryListItem from './CountryListItem';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
@@ -42,4 +43,20 @@ const Countries = (props) => {
   );
 };
 
+Countries.propTypes = {
+  countriesToRender: PropTypes.shape({
+    code: PropTypes.string,
+    name: PropTypes.string,
+    emoji: PropTypes.string,
+    native: PropTypes.string,
+    phone: PropTypes.string,
+    currency: PropTypes.string,
+    emojiU: PropTypes.string,
+    continent: PropTypes.shape({
+      name: PropTypes.string,
+      code: PropTypes.string,
+    }),
+    languages: PropTypes.arrayOf(PropTypes.string),
+  }),
+};
 export default Countries;

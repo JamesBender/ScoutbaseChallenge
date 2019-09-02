@@ -31,6 +31,9 @@ const CountryListItem = ({ country, history }) => {
 CountryListItem.propTypes = {
   country: PropTypes.shape({
     code: PropTypes.string,
+    name: PropTypes.string,
+    emoji: PropTypes.string,
+    native: PropTypes.string,
   }),
 };
 

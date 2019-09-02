@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { H1, CountryNative, LeftDetail, Label, SectionHeading, CountryContianer } from './common/StyledComponents';
-import  Languages  from './Languages';
+import Languages from './Languages';
 
 export const countryQuery = gql`
   query getCountry($code: String) {
@@ -67,4 +68,20 @@ const Country = ({ match }) => {
   );
 };
 
+Country.propTypes = {
+  country: PropTypes.shape({
+    code: PropTypes.string,
+    name: PropTypes.string,
+    emoji: PropTypes.string,
+    native: PropTypes.string,
+    phone: PropTypes.string,
+    currency: PropTypes.string,
+    emojiU: PropTypes.string,
+    continent: PropTypes.shape({
+      name: PropTypes.string,
+      code: PropTypes.string,
+    }),
+    languages: PropTypes.arrayOf(PropTypes.string),
+  }),
+};
 export default Country;

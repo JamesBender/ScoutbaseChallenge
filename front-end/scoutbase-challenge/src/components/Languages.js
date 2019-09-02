@@ -6,7 +6,7 @@ const Languages = ({ languages }) => {
 };
 
 Languages.propTypes = {
-  languages: PropTypes.array,
+  languages: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Languages;
