@@ -10,7 +10,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const httpLink = createHttpLink({
-  uri: 'https://countries.trevorblades.com',
+  uri: process.env.REACT_APP_API_URL,
 });
 
 const client = new ApolloClient({
