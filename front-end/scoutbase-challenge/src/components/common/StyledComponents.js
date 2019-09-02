@@ -31,3 +31,7 @@ export const SectionHeading = styled.div`
   text-align: left;
   font-weight: bold;
 `;
+
+export const CardContainer = styled.div`
+  margin: 0 20px;
+`;

@@ -4,6 +4,7 @@ import CountryListItem from './CountryListItem';
 import { countryListQuery } from './common/queries';
 import { Query } from 'react-apollo';
 import CardColumns from 'react-bootstrap/CardColumns';
+import { CardContainer } from './common/StyledComponents';
 
 const Countries = (props) => {
   return (
@@ -11,7 +12,7 @@ const Countries = (props) => {
       <div>
         <h1>Countries</h1>
       </div>
-      <div className="cardContainer">
+      <CardContainer>
         <Query query={countryListQuery}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading...</div>;
@@ -27,7 +28,7 @@ const Countries = (props) => {
             );
           }}
         </Query>
-      </div>
+      </CardContainer>
     </>
   );
 };
