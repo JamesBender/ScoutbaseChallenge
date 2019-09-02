@@ -1,21 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CountryListItem from './CountryListItem';
-// import gql from 'graphql-tag';
 import { countryListQuery } from './common/queries';
 import { Query } from 'react-apollo';
 import CardColumns from 'react-bootstrap/CardColumns';
-
-// export const countryQuery = gql`
-//   {
-//     countries {
-//       code
-//       name
-//       native
-//       emoji
-//     }
-//   }
-// `;
 
 const Countries = (props) => {
   return (

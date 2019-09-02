@@ -16,31 +16,29 @@ const Country = ({ match }) => {
         const { country } = data;
 
         return (
-          <>
-            <CountryContianer>
-              <H1>{country.name}</H1>
-              <div>
-                <CountryNative>{country.native}</CountryNative> - <span>{country.emoji}</span>
-              </div>
-              <SectionHeading>Interesting Facts:</SectionHeading>
-              <div>
-                <LeftDetail>
-                  <Label>Phone prefix:</Label>
-                  <span>{country.phone}</span>
-                </LeftDetail>
-                <LeftDetail>
-                  <Label>Continent:</Label>
-                  <span>{country.continent.name}</span>
-                </LeftDetail>
-                <span>
-                  <Label>Currency:</Label>
-                  <span>{country.currency}</span>
-                </span>
-              </div>
-              <SectionHeading>Languages:</SectionHeading>
-              <Languages></Languages>
-            </CountryContianer>
-          </>
+          <CountryContianer>
+            <H1>{country.name}</H1>
+            <div>
+              <CountryNative>{country.native}</CountryNative> - <span>{country.emoji}</span>
+            </div>
+            <SectionHeading>Interesting Facts:</SectionHeading>
+            <div>
+              <LeftDetail>
+                <Label>Phone prefix:</Label>
+                <span>{country.phone}</span>
+              </LeftDetail>
+              <LeftDetail>
+                <Label>Continent:</Label>
+                <span>{country.continent.name}</span>
+              </LeftDetail>
+              <span>
+                <Label>Currency:</Label>
+                <span>{country.currency}</span>
+              </span>
+            </div>
+            <SectionHeading>Languages:</SectionHeading>
+            <Languages></Languages>
+          </CountryContianer>
         );
       }}
     </Query>
