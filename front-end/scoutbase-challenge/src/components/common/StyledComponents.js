@@ -35,3 +35,14 @@ export const SectionHeading = styled.div`
 export const CardContainer = styled.div`
   margin: 0 20px;
 `;
+
+export const TestDiv = styled.div`
+  border: 1px green solid;
+  background-color: pink;
+`;
+
+export const DetailSection = styled.div`
+  margin-left: 156px;
+  margin-right: 420px;
+  padding-right: 100px;
+`;

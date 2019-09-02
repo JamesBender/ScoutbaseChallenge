@@ -35,9 +35,8 @@ const Country = ({ match }) => {
                 <Label>Currency:</Label>
                 <span>{country.currency}</span>
               </span>
-            </div>
-            <SectionHeading>Languages:</SectionHeading>
-            <Languages></Languages>
+            </div>            
+            <Languages languages={country.languages}></Languages>
           </CountryContianer>
         );
       }}
@@ -58,7 +57,7 @@ Country.propTypes = {
       name: PropTypes.string,
       code: PropTypes.string,
     }),
-    languages: PropTypes.arrayOf(PropTypes.string),
+    languages: PropTypes.array,
   }),
 };
 
