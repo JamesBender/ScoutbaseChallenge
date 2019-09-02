@@ -1,30 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
+import { countryQuery } from './common/queries';
 import { Query } from 'react-apollo';
 import { H1, CountryNative, LeftDetail, Label, SectionHeading, CountryContianer } from './common/StyledComponents';
 import Languages from './Languages';
-
-export const countryQuery = gql`
-  query getCountry($code: String) {
-    country(code: $code) {
-      code
-      name
-      native
-      phone
-      continent {
-        code
-        name
-      }
-      currency
-      languages {
-        name
-      }
-      emoji
-      emojiU
-    }
-  }
-`;
 
 const Country = ({ match }) => {
   const code = (match ? match.params.id || '' : '').toUpperCase();
@@ -84,4 +63,5 @@ Country.propTypes = {
     languages: PropTypes.arrayOf(PropTypes.string),
   }),
 };
+
 export default Country;

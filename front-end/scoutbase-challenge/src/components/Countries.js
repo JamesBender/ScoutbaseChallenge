@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CountryListItem from './CountryListItem';
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
+import { countryListQuery } from './common/queries';
 import { Query } from 'react-apollo';
 import CardColumns from 'react-bootstrap/CardColumns';
 
-export const countryQuery = gql`
-  {
-    countries {
-      code
-      name
-      native
-      emoji
-    }
-  }
-`;
+// export const countryQuery = gql`
+//   {
+//     countries {
+//       code
+//       name
+//       native
+//       emoji
+//     }
+//   }
+// `;
 
 const Countries = (props) => {
   return (
@@ -23,7 +24,7 @@ const Countries = (props) => {
         <h1>Countries</h1>
       </div>
       <div className="cardContainer">
-        <Query query={countryQuery}>
+        <Query query={countryListQuery}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading...</div>;
             if (error) return <div>Error</div>;

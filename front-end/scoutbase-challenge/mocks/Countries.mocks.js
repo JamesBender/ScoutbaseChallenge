@@ -1,4 +1,4 @@
-import { countryQuery } from '../src/components/Countries';
+import { countryListQuery } from '../src/components/common/queries';
 
 export const mockCountryName = 'sample country',
   mockCountryCode = 'SC',
@@ -15,7 +15,7 @@ export const mockCountryName = 'sample country',
 export const countryListMockQuery = [
   {
     request: {
-      query: countryQuery,
+      query: countryListQuery,
       vairables: {},
     },
     result: {
