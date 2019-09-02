@@ -10,18 +10,12 @@ const Routes = (props) => {
     <div>
       <Navbar>
         <Nav>
-          {/* <ul>
-          <li> */}
           <NavItem>
             <Link to="/">Home</Link>
           </NavItem>
-          {/* </li>
-          <li> */}
           <NavItem>
             <Link to="/countries">Countries</Link>
           </NavItem>
-          {/* </li>
-        </ul> */}
         </Nav>
       </Navbar>
       <Route path="/" exact component={Home} />
