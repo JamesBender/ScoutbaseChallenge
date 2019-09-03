@@ -35,3 +35,17 @@ export const countryMockQuery = [
     },
   },
 ];
+
+export const countryMockEmptyQuery = [
+  {
+    request: {
+      query: countryQuery,
+      variables: { code: 'SC' },
+    },
+    result: {
+      data: {   
+        country: null     
+      },
+    },
+  },
+];

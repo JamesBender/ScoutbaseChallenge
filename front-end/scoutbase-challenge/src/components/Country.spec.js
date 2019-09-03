@@ -79,6 +79,37 @@ describe('when working with the Country component', () => {
     });
   });
 
+  describe('and an invalid country code was passed ', () => {
+    let component,
+      countryCode,
+      countryErrorMessage,
+      badCountryCode = 'SC',
+      errorMessage = 'Please check your country code and try again.';
+
+    beforeAll(async (done) => {
+      await act(async () => {
+        component = render(
+          <MockedProvider mocks={Mock.countryMockEmptyQuery} addTypename={false}>
+            <Country match={{ params: { id: badCountryCode } }} />
+          </MockedProvider>
+        );
+        await wait(0);
+      });
+
+      countryCode = component.getByText(badCountryCode);
+      countryErrorMessage = component.getByText(errorMessage);
+      done();
+    });
+
+    it('should display the country name', () => {
+      expect(countryCode).not.toBeUndefined();
+    });
+
+    it('should display the error message', () => {
+      expect(countryErrorMessage).not.toBeUndefined();
+    });
+  });
+
   describe('and the component is loading', () => {
     let component, pageTitle, loadingMessage;
 
