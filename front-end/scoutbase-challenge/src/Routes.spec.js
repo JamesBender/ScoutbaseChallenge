@@ -3,10 +3,15 @@ import { MemoryRouter, Link } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import Routes from './Routes';
 
-const mockCountriesComponentMessage = 'Mock Countries Component';
-const mockHomeComponentMessage = 'Mock Home Component';
-const mockCountryCode = 'us';
-const mockCountryList = `/country/${mockCountryCode}`;
+const mockCountriesComponentMessage = 'Mock Countries Component',
+  mockCountryComponentMessage = 'Mock Country Component',
+  mockHomeComponentMessage = 'Mock Home Component',
+  mockCountryCode = 'us',
+  mockCountryLink = `/country/${mockCountryCode}`;
+
+jest.mock('./components/Country', () => () => {
+  return <div>{mockCountryComponentMessage}</div>;
+});
 
 jest.mock('./components/Countries', () => () => {
   return <div>{mockCountriesComponentMessage}</div>;
@@ -21,7 +26,7 @@ const RouteTestComponent = (props) => {
     <MemoryRouter initialEntries={['/']} initialIndex={0}>
       <div>
         <Routes props={props} />
-        <Link to={mockCountryList}>Country Test</Link>
+        <Link to={mockCountryLink}>Country Test</Link>
       </div>
     </MemoryRouter>
   );
@@ -62,8 +67,8 @@ describe('when working with the routes component', () => {
     expect(component.getByText(mockHomeComponentMessage)).not.toBeUndefined();
   });
 
-  xit('should be able to navigate to the Country component', () => {
+  it('should be able to navigate to the Country component', () => {
     fireEvent.click(countryLink);
-    expect(component.getByText(mockCountryCode)).not.toBeUndefined();
+    expect(component.getByText(mockCountryComponentMessage)).not.toBeUndefined();
   });
 });

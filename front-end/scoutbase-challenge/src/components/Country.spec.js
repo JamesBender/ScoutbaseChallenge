@@ -86,7 +86,7 @@ describe('when working with the Country component', () => {
       await act(async () => {
         component = render(
           <MockedProvider mocks={[]}>
-            <Country />
+            <Country match={{ params: {} }} />
           </MockedProvider>
         );
 

@@ -6,7 +6,7 @@ import { H1, CountryNative, LeftDetail, Label, SectionHeading, CountryContianer 
 import Languages from './Languages';
 
 const Country = ({ match }) => {
-  const code = (match ? match.params.id || '' : '').toUpperCase();
+  const code = (match.params.id || '').toUpperCase();
 
   return (
     <Query query={countryQuery} variables={{ code }}>
@@ -35,7 +35,7 @@ const Country = ({ match }) => {
                 <Label>Currency:</Label>
                 <span>{country.currency}</span>
               </span>
-            </div>            
+            </div>
             <Languages languages={country.languages}></Languages>
           </CountryContianer>
         );
