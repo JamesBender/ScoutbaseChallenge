@@ -1,4 +1,12 @@
-# Code Challenge for Scoutbase
+# What is this?
+
+This is a code sample I created for a position I was applying for. Utlimatley, the position was a bit more "junior" than the desription indicated, and we were unable to come to an employment agreement that worked for both sides.
+
+Please note that there were certain constratins to this exercise that I was required to conform to, and in some cases I feel a better solution could have been provided had I been allowed to deviate from those constraints. If time allows, I will refactor this application to more in-line with what I would build if the design/tooling was up to me.
+
+Thanks for reading!
+
+## Code Challenge for Scoutbase
 
 If you’re reading this, then you’ve applied for a position at Scoutbase.
 
@@ -9,7 +17,7 @@ This directory includes two subdirectories:
 
 You can do one or you can do two.
 
-## Instructions
+### Instructions
 
 You have received this directory within the .zip archive.
 
