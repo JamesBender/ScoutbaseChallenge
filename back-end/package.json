@@ -20,7 +20,7 @@
   "homepage": "https://github.com/JamesBender/ScoutbaseChallenge#readme",
   "dependencies": {
     "apollo-server-express": "^2.8.2",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "debug": "^4.1.1",
